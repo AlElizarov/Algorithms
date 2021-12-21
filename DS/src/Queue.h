@@ -132,7 +132,7 @@ class QueueImplList : public GeneralizedQueue<T>
 {
 	~QueueImplList()
 	{
-		int dummy = 0;
+		int dummy = 0; // for debug
 	}
 	void push(T val)
 	{

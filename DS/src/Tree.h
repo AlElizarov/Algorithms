@@ -35,8 +35,6 @@ public:
 	{
 		for (auto it = values.begin(); it != values.end(); it++)
 			add(*it);
-
-		int dummy = 0;
 	}
 
 	void inOrder()
@@ -260,7 +258,7 @@ public:
 		if (orderedNodes.size() > 0)
 		{
 			GeneralizedQueue<T>* queue = createGeneralizedQueue<T>(QUEUE_IMPL_LIST);
-			std::cout << "Depth-first: ";
+			std::cout << "Bredth-first: ";
 			std::vector<T> visited;
 			queue->push(orderedNodes[0]);
 

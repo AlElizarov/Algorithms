@@ -62,6 +62,7 @@ int main()
 		std::cout << arr[i] << ", ";
 	std::cout << "\n\n\n";
 
+	// Print results
 	std::cout << std::endl << std::endl;
 	for (int i = 0; i < results.size(); i++)
 		std::cout << results[i].alg.text << (results[i].res ? "TRUE" : "FALSE") << std::endl;
@@ -86,6 +87,7 @@ void kStatistics(size_t size, Index<int>* indexes, Method m)
 
 void trainSort(Alg algo)
 {
+	// Initialization
 	SortingElement<int> elements[] =
 	{
 		{4, {"John", 26}}, // 0
@@ -120,6 +122,7 @@ void trainSort(Alg algo)
 		indexes[i].orderedKey = i;
 	}
 
+	// K statistics
 	if (algo.alg == K_STATISTICS)
 	{
 		std::cout << "Recursion:\n";
@@ -131,6 +134,7 @@ void trainSort(Alg algo)
 		return;
 	}
 
+	// List sort
 	if (algo.alg == LIST_SORT)
 	{
 		List<int> list;
@@ -146,6 +150,7 @@ void trainSort(Alg algo)
 		return;
 	}
 
+	// Sorting
 	std::cout << "Before sort:" << std::endl;
 	for (int i = 0; i < size; i++)
 		std::cout << elements[i] << std::endl;
@@ -189,6 +194,7 @@ void trainSort(Alg algo)
 	for (int i = 0; i < size; i++)
 		std::cout << elements[i] << std::endl;
 
+	// Verify results
 	if (algo.stable)
 	{
 		if (!std::equal(std::begin(elements), std::end(elements), std::begin(ref), &compareStable<int>))

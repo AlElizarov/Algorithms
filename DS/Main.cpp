@@ -6,6 +6,7 @@
 
 void testQueue(QueueImpl impl, size_t maxSize = 0);
 
+// Nested scopes added for debug purposes.
 int main()
 {
 	std::cout << "=========Sieve=======\n";
@@ -55,30 +56,29 @@ int main()
 	/*
 	* QUEUE TRAIN
 	*/
-	{
-		std::cout << "=========Stack Array impl=======\n";
-		testQueue(STACK_IMPL_ARRAY, 100);
+	std::cout << "=========Stack Array impl=======\n";
+	testQueue(STACK_IMPL_ARRAY, 100);
 
-		std::cout << "=========Stack List impl=======\n";
-		testQueue(STACK_IMPL_LIST);
+	std::cout << "=========Stack List impl=======\n";
+	testQueue(STACK_IMPL_LIST);
 
-		std::cout << "=========Queue Array impl=======\n";
-		testQueue(QUEUE_IMPL_ARRAY, 8);
+	std::cout << "=========Queue Array impl=======\n";
+	testQueue(QUEUE_IMPL_ARRAY, 8);
 
-		std::cout << "=========Queue List impl=======\n";
-		testQueue(QUEUE_IMPL_LIST);
-	}
+	std::cout << "=========Queue List impl=======\n";
+	testQueue(QUEUE_IMPL_LIST);
 
-	/*std::cout << "=========Hanoi=======\n";
+	// Comment this out to not waste time on every run.
+	std::cout << "=========Hanoi=======\n";
 	Hanoi hanoi;
 	hanoi.run(5, RIGHT);
-	std::cout << "\n\n\n";*/
+	std::cout << "\n\n\n";
+
+	std::cout << "=========Ruller=======\n";
+	ruller(4);
+	std::cout << "\n\n\n";
 
 	{
-		std::cout << "=========Ruller=======\n";
-		ruller(4);
-		std::cout << "\n\n\n";
-
 		std::cout << "=========Knapsak=======\n";
 		Knapsak knapsak({ 3,4,7,8,9 }, { 4,5,8,11,13 }, 16);
 		std::cout << knapsak.solve();

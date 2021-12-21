@@ -163,14 +163,6 @@ public:
 	template <class T>
 	static void inPlaceSort(SortingElement<T>* arr, size_t size, Index<T>* indexes)
 	{
-		std::vector<Index<T>*> tmp;
-		for (int i = 0; i < size; i++)
-			tmp.push_back(&indexes[i]);
-
-		std::vector<SortingElement<T>*> tmp_arr;
-		for (int i = 0; i < size; i++)
-			tmp_arr.push_back(&arr[i]);
-
 		for (size_t i = 0; i < size; i++)
 		{
 			T key = arr[i].key;
@@ -187,7 +179,6 @@ public:
 					if (indexes[j].orderedKey == current)
 						indexes[j].orderedKey = order;
 				}
-				//indexes[order].orderedKey = order;
 
 				current = order;
 			}
@@ -250,14 +241,6 @@ public:
 	static void mergeSort(size_t size, Index<T>* indexes, Method m)
 	{
 		Index<T>* tmp = new Index<T>[size];
-
-		std::vector<Index<T>*> vec;
-		for (int i = 0; i < size; i++)
-			vec.push_back(&indexes[i]);
-
-		std::vector<Index<T>*> vec_tmp;
-		for (int i = 0; i < size; i++)
-			vec_tmp.push_back(&tmp[i]);
 
 		if(m == RECURSION)
 		    mergeSortImpl(0, size - 1, indexes, tmp);

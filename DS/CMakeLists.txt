@@ -8,8 +8,8 @@ file(GLOB SRC
 include_directories(src)
 
 add_library(DS ${SRC})
-add_executable(DS-bin Main.cpp ) 
-target_link_libraries(DS-bin DS)
+add_executable(DS_Test Main.cpp ) 
+target_link_libraries(DS_Test DS)
 # now we rename resman-bin executable to resman using target properties
-set_target_properties(DS-bin
-        PROPERTIES OUTPUT_NAME DS)
+set_target_properties(DS_Test
+    PROPERTIES OUTPUT_NAME DS)
