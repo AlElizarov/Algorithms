@@ -89,6 +89,14 @@ public:
 		return res;
 	}
 
+	List<T>* MergeSort()
+	{
+		List<T>* res = new List(*this);
+		res->MergeSortImpl(res->head, res->tail, res->size);
+
+		return res;
+	}
+
 	size_t Size() const
 	{
 		return size;
@@ -266,5 +274,82 @@ private:
 		}
 
 		return data;
+	}
+
+	// h - head of current list
+	// t - tail of current list
+	Node<T>* Half(Node<T>* h, Node<T>* t, int listSize, int* size1, int* size2)
+	{
+		if (listSize <= 1) return nullptr;
+
+		// tmp will always point on existing list's node, so no need to explicitly delete tmp.
+		Node<T>* tmp = new Node<T>();
+		tmp->next = h;
+
+		int halfSize = listSize / 2;
+		*size1 = halfSize;
+		*size2 = listSize - halfSize;
+		while (halfSize > 0)
+		{
+			tmp = tmp->next;
+			halfSize--;
+		}
+
+		return tmp; // tmp is the tail of the first list and the head of the second list
+	}
+
+	void Merge(Node<T>* h, Node<T>* half, Node<T>* t)
+	{
+		std::vector<T> res;
+
+		Node<T>* first = h;
+		Node<T>* second = half->next;
+
+		while (first != half->next && second != t->next)
+		{
+			if (first->data <= second->data)
+			{
+				res.push_back(first->data);
+				first = first->next;
+			}
+			else
+			{
+				res.push_back(second->data);
+				second = second->next;
+			}
+		}
+
+		while (first != half->next)
+		{
+			res.push_back(first->data);
+			first = first->next;
+		}
+
+		while (second != t->next)
+		{
+			res.push_back(second->data);
+			second = second->next;
+		}
+
+		Node<T>* tmp = h;
+		for (int i = 0; i < res.size(); i++)
+		{
+			tmp->data = res[i];
+			tmp = tmp->next;
+		}
+	}
+
+	void MergeSortImpl(Node<T>* h, Node<T>* t, int listSize)
+	{
+		int size1 = 0;
+		int size2 = 0;
+		Node<T>* half = Half(h, t, listSize, &size1, &size2);
+		if (half != nullptr)
+		{
+			MergeSortImpl(h, half, size1);
+			MergeSortImpl(half->next, t, size2);
+
+			Merge(h, half, t);
+		}
 	}
 };

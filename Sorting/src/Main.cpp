@@ -3,6 +3,7 @@
 #include "Sort.h"
 
 void trainSort(Alg algo);
+void listSort(SortAlgorithm algo);
 
 struct Res
 {
@@ -85,6 +86,32 @@ void kStatistics(size_t size, Index<int>* indexes, Method m)
 	std::cout << "8th statistics = " << res << std::endl;
 }
 
+void listSort(SortAlgorithm algo)
+{
+	List<int> list;
+	list.Add({ 2, 4, 5, 3, 1, 1, 0, 2, 0 });
+	std::cout << "List before sort:\n";
+	list.Print();
+
+	List<int>* sortedList = nullptr;
+	switch (algo)
+	{
+	case SELECTION_SORT:
+		sortedList = list.Sort();
+		break;
+	case MERGE_SORT:
+		sortedList = list.MergeSort();
+		break;
+	}
+
+	if (sortedList)
+	{
+		std::cout << "List after sort:\n";
+		sortedList->Print();
+		delete sortedList;
+	}
+}
+
 void trainSort(Alg algo)
 {
 	// Initialization
@@ -137,15 +164,10 @@ void trainSort(Alg algo)
 	// List sort
 	if (algo.alg == LIST_SORT)
 	{
-		List<int> list;
-		list.Add({ 2, 4, 5, 3, 1, 1, 0, 2, 0 });
-		std::cout << "List before sort:\n";
-		list.Print();
-
-		List<int>* sortedList = list.Sort();
-		std::cout << "List after sort:\n";
-		sortedList->Print();
-		delete sortedList;
+		std::cout << "\nSelection sort:\n";
+		listSort(SELECTION_SORT);
+		std::cout << "\nMerge sort:\n";
+		listSort(MERGE_SORT);
 
 		return;
 	}
