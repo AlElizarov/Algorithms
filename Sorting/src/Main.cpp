@@ -89,7 +89,7 @@ void kStatistics(size_t size, Index<int>* indexes, Method m)
 void listSort(SortAlgorithm algo)
 {
 	List<int> list;
-	list.Add({ 2, 4, 5, 3, 1, 1, 0, 2, 0 });
+	list.Add({ 4, 4, 2, 1, 1, 1, 5, 4, 7, 3, 4, 12, 12, 5, 6 });
 	std::cout << "List before sort:\n";
 	list.Print();
 
@@ -101,6 +101,9 @@ void listSort(SortAlgorithm algo)
 		break;
 	case MERGE_SORT:
 		sortedList = list.MergeSort();
+		break;
+	case MERGE_SORT_NON_RECURSIVE:
+		sortedList = list.MergeSortNonrecursive();
 		break;
 	}
 
@@ -168,6 +171,8 @@ void trainSort(Alg algo)
 		listSort(SELECTION_SORT);
 		std::cout << "\nMerge sort:\n";
 		listSort(MERGE_SORT);
+		std::cout << "\nMerge sort non recursive:\n";
+		listSort(MERGE_SORT_NON_RECURSIVE);
 
 		return;
 	}

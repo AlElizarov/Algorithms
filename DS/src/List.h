@@ -97,6 +97,43 @@ public:
 		return res;
 	}
 
+	List<T>* MergeSortNonrecursive()
+	{
+		List<T>* res = new List(*this);
+		for (size_t i = 1; i < res->size; i *= 2)
+		{
+			Node<T>* h = res->head;
+			Node<T>* t = res->head;
+			Node<T>* half = res->head;
+
+			while (h && t->next)
+			{
+				size_t j = 0;
+				while (j < i - 1)
+				{
+					half = half->next;
+					j++;
+				}
+
+				j = 0;
+				while ((j < i*2 - 1) && t->next)
+				{
+					t = t->next;
+					j++;
+				}
+
+				if(half)
+					res->Merge(h, half, t);
+
+				h = t->next;
+				half = t->next;
+				t = t->next;
+			}
+		}
+
+		return res;
+	}
+
 	size_t Size() const
 	{
 		return size;
@@ -278,7 +315,7 @@ private:
 
 	// h - head of current list
 	// t - tail of current list
-	Node<T>* Half(Node<T>* h, Node<T>* t, int listSize, int* size1, int* size2)
+	Node<T>* Half(Node<T>* h, Node<T>* t, size_t listSize, size_t* size1, size_t* size2)
 	{
 		if (listSize <= 1) return nullptr;
 
@@ -286,7 +323,7 @@ private:
 		Node<T>* tmp = new Node<T>();
 		tmp->next = h;
 
-		int halfSize = listSize / 2;
+		size_t halfSize = listSize / 2;
 		*size1 = halfSize;
 		*size2 = listSize - halfSize;
 		while (halfSize > 0)
@@ -332,17 +369,17 @@ private:
 		}
 
 		Node<T>* tmp = h;
-		for (int i = 0; i < res.size(); i++)
+		for (size_t i = 0; i < res.size(); i++)
 		{
 			tmp->data = res[i];
 			tmp = tmp->next;
 		}
 	}
 
-	void MergeSortImpl(Node<T>* h, Node<T>* t, int listSize)
+	void MergeSortImpl(Node<T>* h, Node<T>* t, size_t listSize)
 	{
-		int size1 = 0;
-		int size2 = 0;
+		size_t size1 = 0;
+		size_t size2 = 0;
 		Node<T>* half = Half(h, t, listSize, &size1, &size2);
 		if (half != nullptr)
 		{
