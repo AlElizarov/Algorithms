@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "Queue.h"
 #include "Tree.h"
+#include "Heap.h"
 
 void testQueue(QueueImpl impl, size_t maxSize = 0);
 
@@ -69,10 +70,10 @@ int main()
 	testQueue(QUEUE_IMPL_LIST);
 
 	// Comment this out to not waste time on every run.
-	std::cout << "=========Hanoi=======\n";
+	/*std::cout << "=========Hanoi=======\n";
 	Hanoi hanoi;
 	hanoi.run(5, RIGHT);
-	std::cout << "\n\n\n";
+	std::cout << "\n\n\n";*/
 
 	std::cout << "=========Ruller=======\n";
 	ruller(4);
@@ -111,6 +112,19 @@ int main()
 		graph.reset();
 		graph.breadthFirst();
 		std::cout << "\n\n\n";
+	}
+
+	{
+		std::cout << "=========Heap=======\n";
+		Heap<int> heap;
+		heap.construct({ 5,3,4,6,7,8 });
+		heap.print();
+
+		while (heap.size())
+		{
+			heap.delMax();
+			heap.print();
+		}
 	}
 
 	return 0;

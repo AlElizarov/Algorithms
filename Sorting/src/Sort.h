@@ -3,6 +3,7 @@
 #include <vector>
 #include <tuple>
 #include "Queue.h"
+#include "Heap.h"
 
 template <class T>
 struct Index
@@ -13,6 +14,11 @@ struct Index
 	bool operator== (const Index& other)
 	{
 		return originalKey == other.originalKey;
+	}
+
+	bool operator> (const Index& other)
+	{
+		return originalKey > other.originalKey;
 	}
 };
 
@@ -38,6 +44,7 @@ enum SortAlgorithm
 	MERGE_SORT,
 	MERGE_SORT_NON_RECURSIVE,
 	LIST_SORT,
+	HEAP_SORT,
 	K_STATISTICS
 };
 
@@ -158,6 +165,21 @@ public:
 
 			N /= 3;
 		}
+	}
+
+	template <class T>
+	static void heapSort(size_t size, Index<T>* indexes)
+	{
+		Heap<Index<T>> heap;
+		for (size_t i = 0; i < size; i++)
+			heap.insert(indexes[i]);
+
+		Index<T>* tmp = heap.sort();
+
+		for (size_t i = 0; i < size; i++)
+			indexes[i] = tmp[i];
+
+		delete[] tmp;
 	}
 
 	template <class T>

@@ -51,8 +51,12 @@ int main()
 	trainSort({ LIST_SORT, "List sort: ", true });
 	std::cout << "\n\n\n";
 
+	std::cout << "==============Heap sort============\n";
+	trainSort({ HEAP_SORT, "Heap sort: ", false });
+	std::cout << "\n\n\n";
+
 	std::cout << "==============K statistics============\n";
-	trainSort({K_STATISTICS, "", false});
+	trainSort({K_STATISTICS});
 	std::cout << "\n\n\n";
 
 	std::cout << "==============Linear sort============\n";
@@ -213,6 +217,9 @@ void trainSort(Alg algo)
 		break;
 	case MERGE_SORT_NON_RECURSIVE:
 		Sort::mergeSort(size, indexes, STACK);
+		break;
+	case HEAP_SORT:
+		Sort::heapSort(size, indexes);
 		break;
 	}
 	std::cout << "\n\n\n";
